@@ -81,6 +81,7 @@ AttributeEntry kAttributeEntries_DEPRECATED[] = {
     {"@checked", AstAttr::Type::Checked, {}},
     {"@native", AstAttr::Type::Native, {}},
     {"@deprecated", AstAttr::Type::Deprecated, {}},
+    {"@noinline", AstAttr::Type::NoInline, {}},
     {nullptr, AstAttr::Type::Checked, {}}
 };
 
@@ -88,6 +89,7 @@ AttributeEntry kAttributeEntries[] = {
     {"checked", AstAttr::Type::Checked, {}},
     {"native", AstAttr::Type::Native, {}},
     {"deprecated", AstAttr::Type::Deprecated, deprecatedArgsValidator},
+    {"noinline", AstAttr::Type::NoInline, {}},
     {nullptr, AstAttr::Type::Checked, {}}
 };
 

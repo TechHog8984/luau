@@ -312,7 +312,7 @@ struct Compiler
         f.upvals = upvals;
 
         // record information for inlining
-        if (options.optimizationLevel >= 2 && !func->vararg && !func->self && !getfenvUsed && !setfenvUsed)
+        if (options.optimizationLevel >= 2 && !func->hasNoInlineAttribute() && !func->vararg && !func->self && !getfenvUsed && !setfenvUsed)
         {
             f.canInline = true;
             f.stackSize = stackSize;

@@ -3672,6 +3672,22 @@ TEST_CASE_FIXTURE(Fixture, "cannot_use_@_as_variable_name")
     LUAU_ASSERT(pr.errors.size() > 0);
 }
 
+TEST_CASE_FIXTURE(Fixture, "parse_top_level_noinline_fn")
+{
+    std::string src = R"BUILTIN_SRC(
+@noinline function abs(n: number): number
+)BUILTIN_SRC";
+
+    ParseResult pr = tryParse(src);
+    LUAU_ASSERT(pr.errors.size() == 0);
+
+    LUAU_ASSERT(pr.root->body.size == 1);
+    AstStat* root = *(pr.root->body.data);
+    auto func = root->as<AstStatFunction>();
+    LUAU_ASSERT(func);
+    LUAU_ASSERT(func->func->hasNoInlineAttribute());
+}
+
 TEST_CASE_FIXTURE(Fixture, "read_write_table_properties")
 {
     auto pr = tryParse(R"(

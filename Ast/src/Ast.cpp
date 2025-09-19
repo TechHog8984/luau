@@ -339,12 +339,11 @@ void AstExprFunction::visit(AstVisitor* visitor)
 
 bool AstExprFunction::hasNativeAttribute() const
 {
-    for (const auto attribute : attributes)
-    {
-        if (attribute->type == AstAttr::Type::Native)
-            return true;
-    }
-    return false;
+    return hasAttribute(AstAttr::Type::Native);
+}
+bool AstExprFunction::hasNoInlineAttribute() const
+{
+    return hasAttribute(AstAttr::Type::NoInline);
 }
 
 bool AstExprFunction::hasAttribute(const AstAttr::Type attributeType) const

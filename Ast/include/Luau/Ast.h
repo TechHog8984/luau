@@ -195,6 +195,7 @@ public:
         Checked,
         Native,
         Deprecated,
+        NoInline,
         Unknown
     };
 
@@ -486,6 +487,7 @@ public:
     void visit(AstVisitor* visitor) override;
 
     bool hasNativeAttribute() const;
+    bool hasNoInlineAttribute() const;
     bool hasAttribute(AstAttr::Type attributeType) const;
     AstAttr* getAttribute(AstAttr::Type attributeType) const;
 

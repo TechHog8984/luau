@@ -6333,6 +6333,33 @@ RETURN R1 1
     );
 }
 
+
+TEST_CASE("NoInlineBasic")
+{
+    // dont inline function that returns a constant but has @noinline
+    CHECK_EQ(
+        "\n" + compileFunction(
+                   R"(
+@noinline
+local function foo()
+    return 42
+end
+
+local x = foo()
+return x
+)",
+                   1,
+                   2
+               ),
+        R"(
+DUPCLOSURE R0 K0 ['foo']
+MOVE R1 R0
+CALL R1 0 1
+RETURN R1 1
+)"
+    );
+}
+
 TEST_CASE("InlineProhibited")
 {
     // we can't inline variadic functions
